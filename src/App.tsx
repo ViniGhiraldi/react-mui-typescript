@@ -10,4 +10,4 @@ export const App = () => {
       </BrowserRouter>
     </AppThemeProvider>
   );
-}
+};

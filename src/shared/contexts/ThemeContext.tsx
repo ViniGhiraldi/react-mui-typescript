@@ -1,7 +1,7 @@
 import { Box } from '@mui/system';
-import { ThemeProvider } from "@mui/material";
-import { createContext, useCallback, useContext, useMemo, useState } from "react";
-import { LightTheme, DarkTheme } from "./../themes";
+import { ThemeProvider } from '@mui/material';
+import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import { LightTheme, DarkTheme } from './../themes';
 
 interface IThemeContextData{
     themeName: 'light' | 'dark';
@@ -16,7 +16,7 @@ interface IThemeProviderProps{
 
 export const useAppThemeContext = () => {
     return useContext(ThemeContext);
-}
+};
 
 export const AppThemeProvider = ({children}: IThemeProviderProps) => {
     const [themeName, setThemeName] = useState<'light' | 'dark'>('light');
@@ -40,4 +40,4 @@ export const AppThemeProvider = ({children}: IThemeProviderProps) => {
             </ThemeProvider>
         </ThemeContext.Provider>
     );
-}
+};
