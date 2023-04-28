@@ -1,9 +1,9 @@
 {
-    "pessoas": [
-        {
-            "id": 1,
-            "nome": "Juca",
-            "sobrenome": "Silva"
-        }
-    ]
+  "pessoas": [
+    {
+      "id": 1,
+      "nome": "Juca",
+      "sobrenome": "Silva"
+    }
+  ]
 }

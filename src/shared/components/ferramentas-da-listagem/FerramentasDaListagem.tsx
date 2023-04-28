@@ -1,5 +1,7 @@
 import { Box, Button, Icon, IconButton, Paper, TextField, useTheme } from '@mui/material';
 
+import { Environment } from '../../environment';
+
 interface IFerramentasDaListagemProps{
     textoDaBusca?: string;
     mostrarInputBusca?: boolean;
@@ -34,7 +36,7 @@ export const FerramentasDaListagem = ({
                 <TextField
                 size='small' 
                 value={textoDaBusca}
-                placeholder='Pesquisar...' 
+                placeholder={Environment.INPUT_DE_BUSCA} 
                 InputProps={{
                   endAdornment: <IconButton edge='end'><Icon>search</Icon></IconButton>
                 }}
