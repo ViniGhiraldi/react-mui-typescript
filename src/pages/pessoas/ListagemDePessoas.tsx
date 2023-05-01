@@ -1,11 +1,25 @@
 import { useEffect, useMemo, useState } from "react";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, LinearProgress } from '@mui/material';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableFooter,
+  Paper,
+  LinearProgress
+} from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 
-import { IListagemPessoa, PessoasService } from "../../shared/services/api/pessoas/PessoasService";
+import {
+  IListagemPessoa,
+  PessoasService,
+} from "../../shared/services/api/pessoas/PessoasService";
 import { FerramentasDaListagem } from "../../shared/components";
 import { LayoutBaseDePagina } from "../../shared/layouts";
 import { useDebounce } from "../../shared/hooks";
+import { Environment } from "../../shared/environment";
 
 export const ListagemDePessoas = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -15,21 +29,20 @@ export const ListagemDePessoas = () => {
   const [totalCount, setTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  const busca = useMemo(()=>{
-    return searchParams.get('busca') || '';
+  const busca = useMemo(() => {
+    return searchParams.get("busca") || "";
   }, [searchParams]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setIsLoading(true);
 
-    debounce(()=>{
-      PessoasService.getAll(1, busca)
-      .then((result)=>{
+    debounce(() => {
+      PessoasService.getAll(1, busca).then((result) => {
         setIsLoading(false);
 
-        if(result instanceof Error){
+        if (result instanceof Error) {
           alert(result.message);
-        }else{
+        } else {
           console.log(result);
 
           setTotalCount(result.totalCount);
@@ -37,7 +50,6 @@ export const ListagemDePessoas = () => {
         }
       });
     });
-
   }, [busca]);
 
   return (
@@ -47,42 +59,51 @@ export const ListagemDePessoas = () => {
         <FerramentasDaListagem
           mostrarInputBusca
           textoDaBusca={busca}
-          textoBotaoNovo='Nova' 
-          aoMudarTextoDeBusca={texto => setSearchParams({busca: texto}, {replace: true})}
+          textoBotaoNovo="Nova"
+          aoMudarTextoDeBusca={(texto) =>
+            setSearchParams({ busca: texto }, { replace: true })
+          }
         />
       }
     >
-      {isLoading ? (
-        <Box sx={{ m: 1, width: 'auto' }}>
-          <LinearProgress/>
-        </Box>
-      ) : (
-        <TableContainer component={Paper} variant='outlined' sx={{ m: 1, width: 'auto' }}>
-          <Table>
-            <TableHead>
-
-              <TableRow>
+      <TableContainer
+        component={Paper}
+        variant="outlined"
+        sx={{ m: 1, width: "auto" }}
+      >
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Ações</TableCell>
+              <TableCell>Nome completo</TableCell>
+              <TableCell>Email</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id}>
                 <TableCell>Ações</TableCell>
-                <TableCell>Nome completo</TableCell>
-                <TableCell>Email</TableCell>
+                <TableCell>{row.nomeCompleto}</TableCell>
+                <TableCell>{row.email}</TableCell>
               </TableRow>
+            ))}
+          </TableBody>
 
-            </TableHead>
-            <TableBody>
+          {!totalCount && !isLoading &&(
+            <caption>{Environment.LISTAGEM_VAZIA}</caption>
+          )}
 
-              {rows.map(row => (
-                <TableRow key={row.id}>
-                  <TableCell>Ações</TableCell>
-                  <TableCell>{row.nomeCompleto}</TableCell>
-                  <TableCell>{row.email}</TableCell>
-                </TableRow>
-              ))}
-
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
-
+          <TableFooter>
+            {isLoading && (
+              <TableRow>
+                <TableCell colSpan={3}>
+                  <LinearProgress/>
+                </TableCell>
+              </TableRow>
+            )}
+          </TableFooter>
+        </Table>
+      </TableContainer>
     </LayoutBaseDePagina>
   );
 };
