@@ -5,6 +5,24 @@
       "email": "juca@gmail.com",
       "cidadeId": 1,
       "nomeCompleto": "Juca Silva"
+    },
+    {
+      "id": 2,
+      "email": "pedro@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Pedro Pombo"
+    },
+    {
+      "id": 3,
+      "email": "vinicius@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Vinicius Correia"
+    },
+    {
+      "id": 4,
+      "email": "andre@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Andre Burasccos"
     }
   ]
 }
