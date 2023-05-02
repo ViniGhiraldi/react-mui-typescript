@@ -5,6 +5,8 @@ import { useNavigate, useParams} from "react-router-dom";
 import { LayoutBaseDePagina } from "../../shared/layouts";
 import { FerramentasDeDetalhe } from "../../shared/components";
 import { PessoasService } from "../../shared/services/api/pessoas/PessoasService";
+import { Form } from "@unform/web";
+import { VTextField } from "../../shared/forms";
 
 export const DetalheDePessoas = () => {
     const { id = 'nova' } = useParams<'id'>();
@@ -67,10 +69,17 @@ export const DetalheDePessoas = () => {
             />
           }
         >
-            {isLoading && (
-                <LinearProgress />
-            )}
-            <p>Detalhes</p>
+            
+            <Form onSubmit={(dados) => console.log(dados)}>
+                <VTextField
+                  name='firstInput'
+                />
+
+                <button type='submit'>Submit</button>
+            </Form>
+
+
+
         </LayoutBaseDePagina>
     );
 };
