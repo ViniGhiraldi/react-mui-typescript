@@ -9,9 +9,11 @@ import {
   TableFooter,
   Paper,
   LinearProgress,
-  Pagination
+  Pagination,
+  IconButton,
+  Icon
 } from "@mui/material";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import {
   IListagemPessoa,
@@ -25,6 +27,7 @@ import { Environment } from "../../shared/environment";
 export const ListagemDePessoas = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const debounce = useDebounce(500);
+  const navigate = useNavigate();
 
   const [rows, setRows] = useState<IListagemPessoa[]>([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -57,6 +60,20 @@ export const ListagemDePessoas = () => {
     });
   }, [busca, pagina]);
 
+  const handleDelete = (id: number) => {
+    if(confirm('Realmente deseja apagar?')){
+      PessoasService.deleteById(id)
+      .then(result =>{
+        if(result instanceof Error){
+          alert(result.message);
+        }else{
+          setRows(oldRows => [...oldRows.filter(oldRow => oldRow.id !== id)]);
+          alert('Registro apagado com sucesso!');
+        }
+      })
+    }
+  }
+
   return (
     <LayoutBaseDePagina
       titulo="Listagem de pessoas"
@@ -65,6 +82,7 @@ export const ListagemDePessoas = () => {
           mostrarInputBusca
           textoDaBusca={busca}
           textoBotaoNovo="Nova"
+          aoClicarEmNovo={() => navigate('/pessoas/detalhe/nova')}
           aoMudarTextoDeBusca={(texto) =>
             setSearchParams({ busca: texto, pagina: '1' }, { replace: true })
           }
@@ -87,7 +105,14 @@ export const ListagemDePessoas = () => {
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.id}>
-                <TableCell>Ações</TableCell>
+                <TableCell>
+                  <IconButton size='small' onClick={() => handleDelete(row.id)}>
+                    <Icon>delete</Icon>
+                  </IconButton>
+                  <IconButton size='small' onClick={() => navigate(`/pessoas/detalhe/${row.id}`)}>
+                    <Icon>edit</Icon>
+                  </IconButton>
+                </TableCell>
                 <TableCell>{row.nomeCompleto}</TableCell>
                 <TableCell>{row.email}</TableCell>
               </TableRow>
