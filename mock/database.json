@@ -61,9 +61,9 @@
       "id": 15
     },
     {
-      "nomeCompleto": "Marcos Pedro Paulo",
-      "email": "marcos@email.com",
-      "cidadeId": "1",
+      "cidadeId": 1,
+      "email": "eberlin@email.com",
+      "nomeCompleto": "Marcos Eberlin",
       "id": 16
     },
     {

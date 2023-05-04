@@ -1,0 +1,1 @@
+export type TVFormErrors = Record<string, string>;
