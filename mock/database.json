@@ -3,7 +3,7 @@
     {
       "nomeCompleto": "Juca Silva",
       "email": "jucasilva@gmail.com",
-      "cidadeId": 1,
+      "cidadeId": 4,
       "id": 6
     },
     {
@@ -67,10 +67,16 @@
       "id": 16
     },
     {
-      "cidadeId": 1,
-      "email": "rafasilva@email.com",
       "nomeCompleto": "Rafa Silva",
+      "email": "rafa@email.com",
+      "cidadeId": 2,
       "id": 17
+    },
+    {
+      "nomeCompleto": "Geronimo",
+      "email": "geronimo@gmail.com",
+      "cidadeId": 5,
+      "id": 18
     }
   ],
   "cidades": [
@@ -85,6 +91,18 @@
     {
       "nome": "Laranjal Paulista",
       "id": 3
+    },
+    {
+      "nome": "Piracicaba",
+      "id": 4
+    },
+    {
+      "nome": "Capivari",
+      "id": 5
+    },
+    {
+      "nome": "Boituva",
+      "id": 6
     }
   ]
 }

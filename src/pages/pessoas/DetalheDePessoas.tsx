@@ -5,6 +5,7 @@ import * as yup from 'yup';
 
 import { PessoasService } from "../../shared/services/api/pessoas/PessoasService";
 import { VTextField, VForm, useVForm, TVFormErrors } from "../../shared/forms";
+import { AutoCompleteCidade } from "./components/AutoCompleteCidade";
 import { FerramentasDeDetalhe } from "../../shared/components";
 import { LayoutBaseDePagina } from "../../shared/layouts";
 
@@ -48,13 +49,14 @@ export const DetalheDePessoas = () => {
     }else{
       formRef.current?.setData({
         email: '',
-        cidadeId: '',
-        nomeCompleto: ''
+        nomeCompleto: '',
+        cidadeId: undefined
       })
     }
   }, [id]);
 
   const handleSave = (dados: IFormData) => {
+    console.log(dados)
     formValidationSchema.validate(dados, { abortEarly: false })
     .then(dadosValidados =>{
       setIsLoading(true);
@@ -174,12 +176,7 @@ export const DetalheDePessoas = () => {
 
             <Grid container item direction="row" spacing={2}>
               <Grid item xs={12} md={6} lg={4} xl={2}>
-                <VTextField
-                  fullWidth
-                  name="cidadeId" 
-                  disabled={isLoading}
-                  label="Cidade"
-                />
+                <AutoCompleteCidade isExternalLoading={isLoading} />
               </Grid>
             </Grid>
           </Grid>
