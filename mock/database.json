@@ -67,10 +67,24 @@
       "id": 16
     },
     {
+      "cidadeId": 1,
+      "email": "rafasilva@email.com",
       "nomeCompleto": "Rafa Silva",
-      "email": "rafa@email.com",
-      "cidadeId": "1",
       "id": 17
+    }
+  ],
+  "cidades": [
+    {
+      "nome": "Tietê",
+      "id": 1
+    },
+    {
+      "nome": "Cerquilho",
+      "id": 2
+    },
+    {
+      "nome": "Laranjal Paulista",
+      "id": 3
     }
   ]
 }
