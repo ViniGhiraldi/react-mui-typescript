@@ -103,6 +103,17 @@
     {
       "nome": "Boituva",
       "id": 6
+    },
+    {
+      "nome": "Sorocaba",
+      "id": 7
+    },
+    {
+      "nome": "Jundiaí",
+      "id": 8
     }
-  ]
+  ],
+  "auth": {
+    "accessToken": "aaaaaaaaa.bbbbbbbbb.ccccccccc"
+  }
 }
