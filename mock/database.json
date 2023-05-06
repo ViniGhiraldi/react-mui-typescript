@@ -73,10 +73,10 @@
       "id": 17
     },
     {
-      "nomeCompleto": "Geronimo",
-      "email": "geronimo@gmail.com",
-      "cidadeId": 5,
-      "id": 18
+      "nomeCompleto": "Silmara",
+      "email": "silmara@gmail.com",
+      "cidadeId": 6,
+      "id": 19
     }
   ],
   "cidades": [
@@ -111,6 +111,14 @@
     {
       "nome": "Jundiaí",
       "id": 8
+    },
+    {
+      "nome": "Campinas",
+      "id": 9
+    },
+    {
+      "nome": "Tatuí",
+      "id": 10
     }
   ],
   "auth": {
