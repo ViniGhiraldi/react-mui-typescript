@@ -1,8 +1,8 @@
 import { ReactNode, useState } from "react";
-import { Box, Button, Card, CardActions, CardContent, CircularProgress, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, CircularProgress, Icon, IconButton, TextField, Typography } from "@mui/material";
 import * as yup from 'yup';
 
-import { useAuthContext } from "../../contexts";
+import { useAppThemeContext, useAuthContext } from "../../contexts";
 
 const loginSchema = yup.object().shape({
     email: yup.string().email().required(),
@@ -15,6 +15,8 @@ interface ILoginProps{
 
 export const Login = ({children}: ILoginProps) => {
     const { isAuthenticated, login } = useAuthContext();
+    const { toggleTheme } = useAppThemeContext();
+
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -89,7 +91,7 @@ export const Login = ({children}: ILoginProps) => {
             </Box>
           </CardContent>
           <CardActions>
-            <Box width="100%" display="flex" justifyContent="center">
+            <Box width="100%" display="flex" justifyContent='space-between'>
               <Button
                 variant="contained" 
                 disabled={isLoading} 
@@ -98,6 +100,9 @@ export const Login = ({children}: ILoginProps) => {
               >
                 Entrar
               </Button>
+              <IconButton disabled={isLoading} onClick={toggleTheme} title='Alternar tema'>
+                <Icon>dark_mode</Icon>
+              </IconButton>
             </Box>
           </CardActions>
         </Card>

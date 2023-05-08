@@ -12,11 +12,13 @@ import { LayoutBaseDePagina } from "../../shared/layouts";
 interface IFormData {
   email: string;
   cidadeId: number;
-  nomeCompleto: string;
+  nome: string;
+  sobrenome?: string;
 }
 
 const formValidationSchema: yup.ObjectSchema<IFormData> = yup.object().shape({
-  nomeCompleto: yup.string().required().min(3),
+  nome: yup.string().required().min(3),
+  sobrenome: yup.string(),
   email: yup.string().email().required(),
   cidadeId: yup.number().integer().required()
 })
@@ -40,7 +42,7 @@ export const DetalheDePessoas = () => {
           alert(result.message);
           navigate("/pessoas");
         } else {
-          setNome(result.nomeCompleto);
+          setNome(`${result.nome} ${result.sobrenome}`);
           console.log(result);
 
           formRef.current?.setData(result);
@@ -49,7 +51,8 @@ export const DetalheDePessoas = () => {
     }else{
       formRef.current?.setData({
         email: '',
-        nomeCompleto: '',
+        nome: '',
+        sobrenome: '',
         cidadeId: undefined
       })
     }
@@ -84,7 +87,7 @@ export const DetalheDePessoas = () => {
             if(isSaveAndBack()){
               navigate('/pessoas');
             }
-            setNome(dadosValidados.nomeCompleto);
+            setNome(`${dadosValidados.nome} ${dadosValidados.sobrenome}`);
           }
         });
       }
@@ -157,7 +160,18 @@ export const DetalheDePessoas = () => {
                 <VTextField
                   fullWidth
                   label="Nome"
-                  name="nomeCompleto" 
+                  name="nome" 
+                  disabled={isLoading}
+                />
+              </Grid>
+            </Grid>
+
+            <Grid container item direction="row" spacing={2}>
+              <Grid item xs={12} md={6} lg={4} xl={2}>
+                <VTextField
+                  fullWidth
+                  label="Sobrenome (opcional)"
+                  name="sobrenome" 
                   disabled={isLoading}
                 />
               </Grid>

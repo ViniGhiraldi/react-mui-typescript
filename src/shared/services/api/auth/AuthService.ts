@@ -4,9 +4,9 @@ interface IAuth{
     accessToken: string;
 }
 
-const auth = async (email: string, password: string): Promise<IAuth | Error> => {
+const auth = async (email: string, senha: string): Promise<IAuth | Error> => {
     try {
-        const { data } = await Api.get('/auth', {data: {email, password}});
+        const { data } = await Api.post('/entrar', {email, senha});
 
         if(data){
             return data

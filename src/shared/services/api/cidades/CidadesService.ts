@@ -18,8 +18,11 @@ type TCidadesComTotalCount = {
 
 const getAll = async (page = 1, filter = ''): Promise<TCidadesComTotalCount | Error> => {
     try {
-        const urlRelativa = `/cidades?_page=${page}&_limit=${Environment.LIMITE_DE_LINHAS}&nome_like=${filter}`;
-        const { data, headers } = await Api.get(urlRelativa);
+        const accessToken = localStorage.getItem(Environment.LOCAL_STORAGE_KEY__ACCESS_TOKEN);
+        const token = `Bearer ${accessToken ? JSON.parse(accessToken) : ''}`;
+
+        const urlRelativa = `/cidades?page=${page}&limit=${Environment.LIMITE_DE_LINHAS}&filter=${filter}`;
+        const { data, headers } = await Api.get(urlRelativa, { headers: { Authorization: token } });
 
         if(data){
             return {
@@ -37,7 +40,10 @@ const getAll = async (page = 1, filter = ''): Promise<TCidadesComTotalCount | Er
 
 const getById = async (id: number): Promise<IDetalheCidade | Error> => {
     try {
-        const { data } = await Api.get(`/cidades/${id}`);
+        const accessToken = localStorage.getItem(Environment.LOCAL_STORAGE_KEY__ACCESS_TOKEN);
+        const token = `Bearer ${accessToken ? JSON.parse(accessToken) : ''}`;
+
+        const { data } = await Api.get(`/cidades/${id}`, { headers: { Authorization: token } });
 
         if(data){
             return data;
@@ -52,10 +58,13 @@ const getById = async (id: number): Promise<IDetalheCidade | Error> => {
 
 const create = async (dados: Omit<IDetalheCidade,'id'>): Promise<number | Error> => {
     try {
-        const { data } = await Api.post<IDetalheCidade>('/cidades', dados);
+        const accessToken = localStorage.getItem(Environment.LOCAL_STORAGE_KEY__ACCESS_TOKEN);
+        const token = `Bearer ${accessToken ? JSON.parse(accessToken) : ''}`;
+
+        const { data } = await Api.post('/cidades', dados, { headers: { Authorization: token } });
 
         if(data){
-            return data.id;
+            return data;
         }
 
         return new Error('Erro ao criar registro.')
@@ -67,7 +76,10 @@ const create = async (dados: Omit<IDetalheCidade,'id'>): Promise<number | Error>
 
 const updateById = async (id: number, dados: Omit<IDetalheCidade, 'id'>): Promise<void | Error> => {
     try {
-        await Api.put(`/cidades/${id}`, dados);
+        const accessToken = localStorage.getItem(Environment.LOCAL_STORAGE_KEY__ACCESS_TOKEN);
+        const token = `Bearer ${accessToken ? JSON.parse(accessToken) : ''}`;
+
+        await Api.put(`/cidades/${id}`, dados, { headers: { Authorization: token } });
     } catch (error) {
         console.error(error);
         return new Error((error as {message: string}).message || 'Erro ao atualizar registro.');
@@ -76,7 +88,10 @@ const updateById = async (id: number, dados: Omit<IDetalheCidade, 'id'>): Promis
 
 const deleteById = async (id: number): Promise<void | Error> => {
     try {
-        await Api.delete(`/cidades/${id}`);
+        const accessToken = localStorage.getItem(Environment.LOCAL_STORAGE_KEY__ACCESS_TOKEN);
+        const token = `Bearer ${accessToken ? JSON.parse(accessToken) : ''}`;
+
+        await Api.delete(`/cidades/${id}`, { headers: { Authorization: token } });
     } catch (error) {
         console.error(error);
         return new Error((error as {message: string}).message || 'Erro ao deletar registro.');

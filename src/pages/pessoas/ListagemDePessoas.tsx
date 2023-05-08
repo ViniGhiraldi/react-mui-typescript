@@ -113,7 +113,7 @@ export const ListagemDePessoas = () => {
                     <Icon>edit</Icon>
                   </IconButton>
                 </TableCell>
-                <TableCell>{row.nomeCompleto}</TableCell>
+                <TableCell>{`${row.nome} ${row.sobrenome}`}</TableCell>
                 <TableCell>{row.email}</TableCell>
               </TableRow>
             ))}

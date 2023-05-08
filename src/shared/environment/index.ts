@@ -17,5 +17,10 @@ export const Environment = {
     /**
      * Url base de consultas dos dados dessa aplicação
      */
-    URL_BASE: 'http://localhost:3333'
+    URL_BASE: 'http://localhost:3333',
+
+    /**
+     * Possuí a chave de acesso da aplicação armazenada no localStorage
+     */
+    LOCAL_STORAGE_KEY__ACCESS_TOKEN: 'APP_ACCESS_TOKEN'
 }
